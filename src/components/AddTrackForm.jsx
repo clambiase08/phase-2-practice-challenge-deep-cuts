@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 function AddTrackForm({onAddTrack}) {
 
   const [formData, setFormData] = useState({
-    image: "",
     title: "",
     artist: "",
-    BPM: ""
+    BPM: "",
+    image: ""
   })
 
   function handleTrackSubmit(e) {
@@ -19,7 +19,12 @@ function AddTrackForm({onAddTrack}) {
       body: JSON.stringify(formData)
     })
     onAddTrack(formData)
-    setFormData("")
+    setFormData({
+      title: "",
+      artist: "",
+      BPM: "",
+      image: ""
+    })
   }
   
   function handleChange(e) {

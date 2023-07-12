@@ -2,7 +2,6 @@ import React from 'react'
 import Track from './Track'
 
 function TracksList({tracks}) {
-  console.log(tracks)
 
 const trackDetails = tracks.map((track) => {
   return <Track key={track.id} title={track.title} artist={track.artist} bpm={track.BPM} image={track.image} />

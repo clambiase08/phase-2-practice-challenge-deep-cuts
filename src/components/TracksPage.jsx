@@ -6,6 +6,26 @@ import TracksList from './TracksList'
 function TracksPage() {
 
   const [tracks, setTracks] = useState([])
+  const [search, setSearch] = useState({
+    query: "",
+    tracks: []
+  })
+
+  const searchedTracks = tracks.filter((track) => track.title.includes(search.query))
+
+  function handleSearch(e) {
+    const results = tracks.filter((track) => {
+      if (e.target.value === "") {
+        return track
+      } else {
+        return track.title.toLowerCase().includes(e.target.value.toLowerCase())
+      }
+    })
+    setSearch({
+      query: e.target.value,
+      tracks: results
+    })
+  }
 
   const onAddTrack = (newTrack) => {
     setTracks([...tracks, newTrack])
@@ -19,9 +39,9 @@ function TracksPage() {
     
   return (
     <div>
-      <Search />
+      <Search handleSearch={handleSearch}/>
       <AddTrackForm onAddTrack={onAddTrack} />
-      <TracksList tracks={tracks}/>
+      <TracksList tracks={searchedTracks}/>
     </div>
   )
 }
